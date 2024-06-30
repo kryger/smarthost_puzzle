@@ -1,22 +1,31 @@
-# Getting Started
+# SmartHost puzzle project
 
-### Reference Documentation
-For further reference, please consider the following sections:
+## Running
+From the terminal:
+```dtd
+ ✗ ./gradlew bootRun
+```
+Or via IDE via the default Spring Boot development runners.
 
-* [Official Gradle documentation](https://docs.gradle.org)
-* [Spring Boot Gradle Plugin Reference Guide](https://docs.spring.io/spring-boot/docs/3.3.1/gradle-plugin/reference/html/)
-* [Create an OCI image](https://docs.spring.io/spring-boot/docs/3.3.1/gradle-plugin/reference/html/#build-image)
-* [Spring Web](https://docs.spring.io/spring-boot/docs/3.3.1/reference/htmlsingle/index.html#web)
+This will start up the Sprint Boot web app and run it on Tomcat on the default port 8080.
 
-### Guides
-The following guides illustrate how to use some features concretely:
+In order to use the service via the JSON api send GET requests to the `/occupancy/matchRooms` endpoint either from a browser of via curl.
+Pass in `freeEconomyRooms` and `freePremiumRooms` integer parameters to change the number of available rooms.
 
-* [Building a RESTful Web Service](https://spring.io/guides/gs/rest-service/)
-* [Serving Web Content with Spring MVC](https://spring.io/guides/gs/serving-web-content/)
-* [Building REST services with Spring](https://spring.io/guides/tutorials/rest/)
+Examples:
 
-### Additional Links
-These additional references should also help you:
+http://localhost:8080/occupancy/matchRooms?freeEconomyRooms=1&freePremiumRooms=7
+http://localhost:8080/occupancy/matchRooms?freeEconomyRooms=3&freePremiumRooms=3
 
-* [Gradle Build Scans – insights for your project's build](https://scans.gradle.com#gradle)
+```dtd
+➜ curl -XGET 'http://localhost:8080/occupancy/matchRooms?freeEconomyRooms=1&freePremiumRooms=7'
+{"ECONOMY":{"takenRooms":1,"totalIncome":4500},"PREMIUM":{"takenRooms":7,"totalIncome":115399}}%                                                                  ```
+```
 
+
+## TODO (things that could actually make a difference, out of tens of all potential improvements)
+- input parameters validation
+- tests for unhappy paths and errors
+- Spring Boot actuator (hot reload, etc.)
+- cache if bids don't change between API calls
+- business logic optimisation, improve performance if the flow can be simplified and turns out the be a bottleneck
