@@ -8,7 +8,13 @@ import java.util.Map;
 
 @Service
 public class RoomToBidderMatchService {
-    public Map<RoomType, RoomsOffer> matchRoomsToBiggers(List<Integer> bidsList, Integer freeEconomyRooms, Integer freePremiumRooms) {
+    /**
+     * @param bidsList
+     * @param freePremiumRooms
+     * @param freeEconomyRooms
+     * @return
+     */
+    public Map<RoomType, RoomsOffer> matchRoomsToBidders(List<Integer> bidsList, Integer freePremiumRooms, Integer freeEconomyRooms) {
         HashMap<RoomType, RoomsOffer> result = new HashMap<>();
         result.put(RoomType.ECONOMY, new RoomsOffer(freeEconomyRooms,freeEconomyRooms * 3));
         result.put(RoomType.PREMIUM, new RoomsOffer(freePremiumRooms, freePremiumRooms * 5));

@@ -24,6 +24,6 @@ public class OccupancyController {
     @GetMapping("/matchRooms")
     public Map<RoomType, RoomsOffer> calculate(@RequestParam Integer freePremiumRooms, @RequestParam Integer freeEconomyRooms) {
         List<Integer> bidsList = bidsService.getCurrentBidsInCents();
-        return roomToBidderMatchService.matchRoomsToBiggers(bidsList, freeEconomyRooms, freePremiumRooms);
+        return roomToBidderMatchService.matchRoomsToBidders(bidsList, freePremiumRooms, freeEconomyRooms);
     }
 }
