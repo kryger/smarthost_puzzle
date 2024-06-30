@@ -20,7 +20,7 @@ class RoomToBidderMatchServiceTest {
         assertThat(results.get(RoomType.PREMIUM).takenRooms()).isEqualTo(3);
         assertThat(results.get(RoomType.ECONOMY).takenRooms()).isEqualTo(3);
 
-        assertThat(results.get(RoomType.PREMIUM).takenRooms()).isEqualTo(73800);
+        assertThat(results.get(RoomType.PREMIUM).totalIncome()).isEqualTo(73800);
         assertThat(results.get(RoomType.ECONOMY).totalIncome()).isEqualTo(16799);
 
     }
@@ -32,7 +32,7 @@ class RoomToBidderMatchServiceTest {
         assertThat(results.get(RoomType.PREMIUM).takenRooms()).isEqualTo(6);
         assertThat(results.get(RoomType.ECONOMY).takenRooms()).isEqualTo(4);
 
-        assertThat(results.get(RoomType.PREMIUM).takenRooms()).isEqualTo(105400);
+        assertThat(results.get(RoomType.PREMIUM).totalIncome()).isEqualTo(105400);
         assertThat(results.get(RoomType.ECONOMY).totalIncome()).isEqualTo(18999);
     }
 
@@ -43,7 +43,7 @@ class RoomToBidderMatchServiceTest {
         assertThat(results.get(RoomType.PREMIUM).takenRooms()).isEqualTo(2);
         assertThat(results.get(RoomType.ECONOMY).takenRooms()).isEqualTo(4);
 
-        assertThat(results.get(RoomType.PREMIUM).takenRooms()).isEqualTo(58300);
+        assertThat(results.get(RoomType.PREMIUM).totalIncome()).isEqualTo(58300);
         assertThat(results.get(RoomType.ECONOMY).totalIncome()).isEqualTo(18999);
     }
 
@@ -54,8 +54,12 @@ class RoomToBidderMatchServiceTest {
         assertThat(results.get(RoomType.PREMIUM).takenRooms()).isEqualTo(7);
         assertThat(results.get(RoomType.ECONOMY).takenRooms()).isEqualTo(1);
 
-        assertThat(results.get(RoomType.PREMIUM).takenRooms()).isEqualTo(115300);
-        assertThat(results.get(RoomType.ECONOMY).totalIncome()).isEqualTo(4599);
+        // NOTE: apparent mistake/typo in the instructions, expected 45.99EUR but 45.00 in input data
+        // assertThat(results.get(RoomType.ECONOMY).totalIncome()).isEqualTo(4599); // incorrect
+        assertThat(results.get(RoomType.ECONOMY).totalIncome()).isEqualTo(4500);
+        // NOTE: consequently the premium sum is not going to be 1153.00, but 1153.99
+        // assertThat(results.get(RoomType.PREMIUM).totalIncome()).isEqualTo(115300); // incorrect
+        assertThat(results.get(RoomType.PREMIUM).totalIncome()).isEqualTo(115399);
     }
 
 }
